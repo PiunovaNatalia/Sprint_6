@@ -11,10 +11,10 @@
 
 ## Запуск проекта:
 1. Создать и активировать виртуальное окружение Python
-2. Установить зависомсти: pip install requirements.txt
+2. Установить зависомсти: python -m pip install requirements.txt
 3. Запустить тесты: pytest -v
 4. После завершения тестов появится папка с отчетами allure_results
 
 ## Сборка отчетов:
-1. Генерация: pytest -v --alluredir=allure_results
+1. Генерация: python -m pytest -v --alluredir=allure_results
 2. Создание html-страниц с отчетами: allure serve allure_results
