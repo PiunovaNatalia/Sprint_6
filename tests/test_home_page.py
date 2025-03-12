@@ -1,29 +1,17 @@
-from confest import get_driver
 from pages.home_page import HomePage
 from data import Data
 import pytest
 import allure
+from base_test import BaseTest
 
 
-class TestHomePage:
-    driver = None
-
-    @classmethod
-    @allure.title('Создаем браузер')
-    def setup_class(cls):
-        cls.driver = get_driver()
-
-    @classmethod
-    @allure.title('Закрываем браузер')
-    def teardown_class(cls):
-        cls.driver.quit()
-
+class TestHomePage(BaseTest):
     @allure.title('Тестирование раздела «Вопросы о важном»: вопрос №{item_number}')
     @allure.description(
         'Открываем главную страницу, делаем скролл вниз, пока не появится раздел «Вопросы о важном».'
         'Нажимаем на каждый из вопросов, ждем появления текста ответа.'
     )
-    @pytest.mark.parametrize('item_number', HomePage.accordion_items_ids)
+    @pytest.mark.parametrize('item_number', Data.ACCORDION_ITEMS_IDS)
     def test_accordion(self, item_number):
         """
         Тест с параметризацией на все элементы из
@@ -38,15 +26,16 @@ class TestHomePage:
         """
 
         page = HomePage(self.driver)
-        page.open_home_page()
-        page.page_scroll_down()
+        page.open_page(Data.HOME_PAGE_URL)
+        page.wait_for_visibility_of_element(page.home_header__header)
 
+        page.page_scroll_down()
+        page.wait_for_visibility_of_element(page.home_faq)
         according_button = page.get_according_button(item_number)
         page.click_accordion_button(according_button, item_number)
-
         according_panel = page.get_according_panel(item_number)
 
-        assert according_panel.is_displayed and according_panel.text == page.accordion_items_text[item_number]
+        assert according_panel.is_displayed() and according_panel.text == Data.ACCORDION_ITEMS_TEXT[item_number]
 
     @allure.title('Тестирование открытия страницы Яндекса')
     @allure.description(
@@ -55,9 +44,12 @@ class TestHomePage:
     )
     def test_open_yandex_page(self):
         page = HomePage(self.driver)
-        page.open_home_page()
-        page.click_yandex_logo()
-        page.switch_to_yandex_tab()
-        url = page.get_current_url()
+        page.open_page(Data.HOME_PAGE_URL)
+        page.wait_for_visibility_of_element(page.home_header__header)
 
-        assert Data.YANDEX_URL in url
+        page.click_yandex_logo()
+        page.switch_to_next_window()
+        page.wait_for_number_of_windows_to_be_two()
+        open_window_num = page.get_number_of_open_windows()
+
+        assert open_window_num == Data.NEEDED_OPEN_WINDOW_NUMBER
