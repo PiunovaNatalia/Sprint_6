@@ -1,9 +1,6 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from data import Data
 import allure
-from time import sleep
 
 
 class BasePage:
