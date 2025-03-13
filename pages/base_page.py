@@ -1,9 +1,12 @@
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import allure
 
 
 class BasePage:
+    home_header__header = (By.XPATH, ".//div[contains(@class,'Home_Header')]")
+
     def __init__(self, driver):
         self.driver = driver
 
@@ -38,3 +41,15 @@ class BasePage:
     @allure.step('Кликаем по кнопке')
     def click(self, xpath):
         self.get_element(xpath).click()
+
+    @allure.step('Переключаемся на окно №{window_number}')
+    def switch_to_window_by_num(self, window_number):
+        self.driver.switch_to.window(self.driver.window_handles[window_number])
+
+    @allure.step('Получаем количество открытых окон')
+    def get_number_of_open_windows(self):
+        return len(self.driver.window_handles)
+
+    @allure.step('Выполняем скрипт по нажатию кнопки')
+    def execute_click_script(self, element):
+        self.driver.execute_script("arguments[0].click();", element)

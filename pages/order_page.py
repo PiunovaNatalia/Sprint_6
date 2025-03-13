@@ -9,31 +9,23 @@ class OrderPage(BasePage):
     make_order__footer_button = (By.XPATH, "(.//div[contains(@class,'Home_FinishButton')]/button[text()='Заказать'])")
     scooter__header_link = (By.XPATH, ".//a[contains(@class,'Header_LogoScooter')]")
     order_page_header = (By.XPATH, "(.//div[contains(@class,'Order_Header')])")
-    home_header__header = (By.XPATH, "(.//div[contains(@class,'Home_Header')])")
-
     name_input = (By.XPATH, "(.//     input[contains(@class,'Input_Input')])[2]")
     surname_input = (By.XPATH, "(.//input[contains(@class,'Input_Input')])[3]")
     address_input = (By.XPATH, "(.//input[contains(@class,'Input_Input')])[4]")
     metro_station_input = (By.XPATH, "(.//input[@class='select-search__input'])")
     number_input = (By.XPATH, "(.//input[contains(@class,'Input_Input')])[5]")
-
     selected_station_template = ".//div[(contains(@class,'Order_Text')) and (text()='{metro_station}')]"
     select_input = (By.XPATH, ".//div[contains(@class,'select-search__select')]")
     button_next = (By.XPATH, ".//button[(contains(@class,'Button_Button')) and (text()='Далее')]")
     look_order_status = (By.XPATH, ".//button[(contains(@class,'Button_Button')) and (text()='Посмотреть статус')]")
-
     header_about_rent = (By.XPATH, ".//div[(contains(@class,'Order_Header')) and (text()='Про аренду')]")
     rent_time_button = (By.XPATH, ".//div[contains(@class,'Dropdown-placeholder')]")
     drop_down_menu = (By.XPATH, ".//div[contains(@class,'Dropdown-menu')]")
     drop_down_menu_option_template = ".//div[(contains(@class,'Dropdown-option')) and (text()='{period}')]"
-
     datepicker_input = (By.XPATH, ".//div[contains(@class,'react-datepicker__input-container')]/input")
     opened_datepicker = (By.XPATH, ".//div[contains(@class,'react-datepicker__month-container')]")
-
     datepicker_pick_day_template = ".//div[(contains(@class,'react-datepicker__day')) and (text()='{day}')]"
-
     final_order_button = (By.XPATH, ".//div[contains(@class,'Order_Buttons')]/button[text()='Заказать']")
-
     order_modal = (By.XPATH, ".//div[contains(@class,'Order_Modal')]")
     button_yes = (By.XPATH, ".//button[(contains(@class,'Button_Button')) and (text()='Да')]")
     order_modal__header = (By.XPATH, ".//div[contains(@class,'Order_ModalHeader')]")
