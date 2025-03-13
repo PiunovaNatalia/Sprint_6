@@ -1,0 +1,9 @@
+__pycache__/
+**/__pycache__/
+.venv/
+.idea/
+*.log
+allure_results/
+tests/geckodriver.log
+.pytest_cache/
+

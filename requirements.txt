@@ -1,0 +1,4 @@
+selenium==4
+webdriver_manager
+pytest
+allure-pytest
